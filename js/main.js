@@ -723,7 +723,7 @@ function setupAILab() {
 }
 async function loadTeamMembers() {
     try {
-        const response = await fetch('training-progress.json');
+        const response = await fetch('data/training-progress.json');
         if (!response.ok) {
             throw new Error(`Error al cargar el archivo JSON: ${response.statusText}`);
         }
