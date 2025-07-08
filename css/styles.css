@@ -469,3 +469,21 @@ html {
         transform: rotate(360deg); 
     }
 }
+
+/* --- Estilos para las Pestañas del Laboratorio de IA --- */
+.tab-button {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: #4b5563; /* gris */
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.tab-button:hover {
+    color: #1e40af; /* corporate-blue */
+}
+
+.tab-button.active-tab {
+    color: #1e40af; /* corporate-blue */
+    border-bottom-color: #1e40af; /* corporate-blue */
+}
