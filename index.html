@@ -484,51 +484,73 @@
             </div>
         </section>
 
-        <!-- Section 5: LABORATORIO DE IA -->
+        <!-- Section 5: LABORATORIO DE IA (CON PESTAÑAS) -->
         <section id="laboratorio-ia" class="section-content min-h-screen p-6 md:p-12 bg-gray-50">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Laboratorio de IA en la Práctica</h2>
                 <p class="text-xl text-gray-700 text-center mb-12">
-                    Experimenta de primera mano cómo la IA puede transformar una tarea cotidiana.
+                    Experimenta de primera mano cómo la IA puede transformar tareas cotidianas.
                 </p>
         
-                <!-- Asistente de Redacción -->
                 <div class="bg-white rounded-lg shadow-2xl p-8 border border-gray-200">
-                    <h3 class="text-2xl font-semibold text-corporate-dark mb-6 text-center">Asistente de Redacción Inteligente</h3>
-                    
-                    <!-- NOVEDAD: Menú desplegable para elegir el escenario -->
-                    <div class="mb-6">
-                        <label for="scenarioSelector" class="block font-semibold mb-2 text-gray-700">1. Elige un escenario de ejemplo:</label>
-                        <select id="scenarioSelector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition">
-                            <!-- Las opciones se generarán con JavaScript -->
-                        </select>
+                    <!-- Pestañas de Navegación del Laboratorio -->
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                            <button class="tab-button active-tab" data-target="redaccion">
+                                <i class="fas fa-magic mr-2"></i>Asistente de Redacción
+                            </button>
+                            <button class="tab-button" data-target="formulas">
+                                <i class="fas fa-table mr-2"></i>Generador de Fórmulas Excel
+                            </button>
+                        </nav>
                     </div>
         
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <!-- Panel de Entrada -->
-                        <div>
-                            <label for="inputText" class="block font-semibold mb-2 text-gray-700">2. Texto Original (puedes modificarlo):</label>
-                            <textarea id="inputText" rows="12" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition"></textarea>
+                    <!-- Contenido de la Pestaña 1: Asistente de Redacción -->
+                    <div id="redaccion" class="tab-content">
+                        <h3 class="text-2xl font-semibold text-corporate-dark mb-6 text-center">Asistente de Redacción Inteligente</h3>
+                        <div class="mb-6">
+                            <label for="scenarioSelector" class="block font-semibold mb-2 text-gray-700">1. Elige un escenario de ejemplo:</label>
+                            <select id="scenarioSelector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition"></select>
                         </div>
-        
-                        <!-- Panel de Salida -->
-                        <div>
-                            <label class="block font-semibold mb-2 text-gray-700">4. Resultado generado por la IA:</label>
-                            <div id="outputPanel" class="w-full h-full p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center justify-center">
-                                <span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <label for="inputText" class="block font-semibold mb-2 text-gray-700">2. Texto Original:</label>
+                                <textarea id="inputText" rows="12" class="w-full p-4 border border-gray-300 rounded-lg"></textarea>
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-2 text-gray-700">4. Resultado de la IA:</label>
+                                <div id="outputPanel" class="w-full h-full p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center justify-center"></div>
                             </div>
                         </div>
+                        <div class="mt-8 text-center">
+                            <p class="font-semibold mb-4 text-gray-700">3. Elige una acción:</p>
+                            <button id="summarizeBtn" class="bg-corporate-blue text-white px-6 py-3 rounded-lg hover:bg-corporate-dark transition-transform hover:scale-105 mr-3 shadow-lg">Resumir Texto</button>
+                            <button id="improveBtn" class="bg-accent-green text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform hover:scale-105 shadow-lg">Mejorar a Tono Profesional</button>
+                        </div>
                     </div>
         
-                    <!-- Botones de Acción -->
-                    <div class="mt-8 text-center">
-                        <p class="font-semibold mb-4 text-gray-700">3. Elige una acción:</p>
-                        <button id="summarizeBtn" class="bg-corporate-blue text-white px-6 py-3 rounded-lg hover:bg-corporate-dark transition-transform hover:scale-105 mr-3 shadow-lg">
-                            <i class="fas fa-compress-alt mr-2"></i>Resumir Texto
-                        </button>
-                        <button id="improveBtn" class="bg-accent-green text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform hover:scale-105 shadow-lg">
-                            <i class="fas fa-magic mr-2"></i>Mejorar a Tono Profesional
-                        </button>
+                    <!-- Contenido de la Pestaña 2: Generador de Fórmulas -->
+                    <div id="formulas" class="tab-content hidden">
+                        <h3 class="text-2xl font-semibold text-corporate-dark mb-6 text-center">Generador de Fórmulas Excel</h3>
+                        <div class="mb-6">
+                            <label for="formulaScenarioSelector" class="block font-semibold mb-2 text-gray-700">1. Elige un problema a resolver:</label>
+                            <select id="formulaScenarioSelector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition"></select>
+                        </div>
+                        <div class="text-center">
+                            <div class="mb-4">
+                                <p class="font-semibold text-gray-700 mb-2">2. Problema en lenguaje natural:</p>
+                                <div id="formulaProblem" class="p-4 bg-gray-100 rounded-lg text-lg italic text-gray-800"></div>
+                            </div>
+                            <div class="my-6">
+                                <button id="generateFormulaBtn" class="bg-corporate-blue text-white px-8 py-3 rounded-lg hover:bg-corporate-dark transition-transform hover:scale-105 shadow-lg">3. Generar Fórmula con IA</button>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700 mb-2">4. Fórmula generada por la IA:</p>
+                                <div id="formulaOutput" class="p-4 bg-gray-800 text-white font-mono text-left rounded-lg flex items-center justify-between">
+                                    <span class="text-gray-400">Aquí aparecerá la fórmula...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
