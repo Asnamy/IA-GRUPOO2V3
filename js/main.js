@@ -583,11 +583,9 @@ function setupAILab() {
         button.addEventListener('click', () => {
             const targetId = button.dataset.target;
             
-            // Actualizar botones
             tabButtons.forEach(btn => btn.classList.remove('active-tab'));
             button.classList.add('active-tab');
 
-            // Actualizar contenido
             tabContents.forEach(content => {
                 if (content.id === targetId) {
                     content.classList.remove('hidden');
@@ -600,6 +598,7 @@ function setupAILab() {
 
     // --- LÓGICA PARA EL ASISTENTE DE REDACCIÓN (Pestaña 1) ---
     (function setupWritingAssistant() {
+        // ... (Esta parte no necesita cambios, se mantiene igual)
         const scenarioSelector = document.getElementById('scenarioSelector');
         const summarizeBtn = document.getElementById('summarizeBtn');
         const improveBtn = document.getElementById('improveBtn');
@@ -664,24 +663,9 @@ function setupAILab() {
         const outputDiv = document.getElementById('formulaOutput');
 
         const formulaScenarios = [
-            {
-                id: 'sumif',
-                name: 'Sumar celdas que cumplen una condición',
-                problem: "Quiero sumar todos los valores de la columna 'B' donde la celda correspondiente en la columna 'A' diga 'Ventas'.",
-                formula: '=SUMIF(A:A, "Ventas", B:B)'
-            },
-            {
-                id: 'vlookup',
-                name: 'Buscar un valor en una tabla',
-                problem: "Quiero encontrar el 'Precio' (columna 3) de un 'Producto' (cuyo ID está en la celda E2) dentro de la tabla A1:C50.",
-                formula: '=VLOOKUP(E2, A1:C50, 3, FALSE)'
-            },
-            {
-                id: 'countif',
-                name: 'Contar cuántas veces aparece un texto',
-                problem: "Quiero contar cuántas celdas en el rango A1 a A100 contienen la palabra 'Completado'.",
-                formula: '=COUNTIF(A1:A100, "Completado")'
-            }
+             { id: 'sumif', name: 'Sumar celdas que cumplen una condición', problem: "Quiero sumar todos los valores de la columna 'B' donde la celda en la columna 'A' diga 'Ventas'.", formula: '=SUMIF(A:A, "Ventas", B:B)' },
+             { id: 'vlookup', name: 'Buscar un valor en una tabla', problem: "Quiero encontrar el 'Precio' (columna 3) de un 'Producto' (ID en celda E2) dentro de la tabla A1:C50.", formula: '=VLOOKUP(E2, A1:C50, 3, FALSE)' },
+             { id: 'countif', name: 'Contar cuántas veces aparece un texto', problem: "Quiero contar cuántas celdas en el rango A1:A100 contienen la palabra 'Completado'.", formula: '=COUNTIF(A1:A100, "Completado")' }
         ];
 
         formulaScenarios.forEach(sc => scenarioSelector.add(new Option(sc.name, sc.id)));
@@ -701,19 +685,38 @@ function setupAILab() {
             if (selected) {
                 outputDiv.innerHTML = '<div class="loader ease-linear rounded-full border-2 border-t-2 border-gray-400 h-6 w-6"></div>';
                 setTimeout(() => {
-                    outputDiv.innerHTML = `<span>${selected.formula}</span><button onclick="copyToClipboard('${selected.formula}', this)" class="ml-4 bg-gray-600 px-3 py-1 rounded text-xs hover:bg-gray-500">Copiar</button>`;
+                    // CAMBIO 1: Eliminamos el `onclick` y usamos un atributo `data-formula` para guardar el texto a copiar.
+                    outputDiv.innerHTML = `
+                        <span>${selected.formula}</span>
+                        <button class="copy-button ml-4 bg-gray-600 px-3 py-1 rounded text-xs hover:bg-gray-500" data-formula="${selected.formula}">Copiar</button>
+                    `;
                 }, 2000);
             }
         });
-    })();
-}
 
-// Función global para copiar al portapapeles
-function copyToClipboard(text, element) {
-    navigator.clipboard.writeText(text).then(() => {
-        element.textContent = '¡Copiado!';
-        setTimeout(() => { element.textContent = 'Copiar'; }, 2000);
-    });
+        // CAMBIO 2: Usamos delegación de eventos en el contenedor de salida.
+        outputDiv.addEventListener('click', function(event) {
+            // Comprobamos si el elemento clickeado es nuestro botón de copiar.
+            if (event.target.classList.contains('copy-button')) {
+                const button = event.target;
+                const formulaToCopy = button.dataset.formula;
+                
+                navigator.clipboard.writeText(formulaToCopy).then(() => {
+                    button.textContent = '¡Copiado!';
+                    // Mostramos una notificación de éxito en lugar del popup de error.
+                    showNotification('Fórmula copiada al portapapeles', 'success');
+                    setTimeout(() => {
+                        button.textContent = 'Copiar';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Error al copiar: ', err);
+                    // En caso de que falle el API del portapapeles.
+                    showNotification('No se pudo copiar la fórmula.', 'error');
+                });
+            }
+        });
+    })();
+
+    // CAMBIO 3: Ya no necesitamos la función global, así que la eliminamos para mantener el código limpio.
+    // Se eliminó la función `copyToClipboard` y `window.copyToClipboard`.
 }
-// Hacemos la función accesible globalmente para que el 'onclick' funcione
-window.copyToClipboard = copyToClipboard;
