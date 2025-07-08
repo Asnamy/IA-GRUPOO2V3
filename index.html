@@ -35,6 +35,7 @@
                     <li><a href="#que-es-ia" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-brain mr-3"></i>¿Qué es la IA?</a></li>
                     <li><a href="#alcance-ia" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-expand mr-3"></i>El Alcance de la IA</a></li>
                     <li><a href="#ia-accion" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-bolt mr-3"></i>IA en Acción</a></li>
+                    <li><a href="#laboratorio-ia" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-flask mr-3"></i>Laboratorio IA</a></li>
                     <li><a href="#beneficios" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-chart-line mr-3"></i>Beneficios</a></li>
                     <li><a href="#politica" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-shield-alt mr-3"></i>Política de Uso</a></li>
                     <li><a href="#recursos" class="nav-link block p-3 rounded hover:bg-corporate-blue transition-colors"><i class="fas fa-newspaper mr-3"></i>Recursos</a></li>
@@ -483,7 +484,49 @@
             </div>
         </section>
 
-        <!-- Section 5: BENEFICIOS Y OPORTUNIDADES -->
+        <!-- Section 5: LABORATORIO DE IA -->
+        <section id="laboratorio-ia" class="section-content min-h-screen p-6 md:p-12 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Laboratorio de IA en la Práctica</h2>
+                <p class="text-xl text-gray-700 text-center mb-12">
+                    Experimenta de primera mano cómo la IA puede transformar una tarea cotidiana.
+                </p>
+        
+                <!-- Asistente de Redacción -->
+                <div class="bg-white rounded-lg shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-semibold text-corporate-dark mb-6 text-center">Asistente de Redacción Inteligente</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        
+                        <!-- Panel de Entrada -->
+                        <div>
+                            <label for="inputText" class="block font-semibold mb-2 text-gray-700">1. Escribe o modifica el texto original:</label>
+                            <textarea id="inputText" rows="12" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition">Hola equipo, quería recordarles sobre la reunión de mañana para discutir el reporte trimestral. Es importante que todos vengan preparados para hablar de los resultados y los próximos pasos. La junta es a las 10am. No lleguen tarde. Saludos.</textarea>
+                        </div>
+        
+                        <!-- Panel de Salida -->
+                        <div>
+                            <label class="block font-semibold mb-2 text-gray-700">3. Observa el resultado generado por la IA:</label>
+                            <div id="outputPanel" class="w-full h-full p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center justify-center">
+                                <span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Botones de Acción -->
+                    <div class="mt-8 text-center">
+                        <p class="font-semibold mb-4 text-gray-700">2. Elige una acción:</p>
+                        <button id="summarizeBtn" class="bg-corporate-blue text-white px-6 py-3 rounded-lg hover:bg-corporate-dark transition-transform hover:scale-105 mr-3 shadow-lg">
+                            <i class="fas fa-compress-alt mr-2"></i>Resumir Texto
+                        </button>
+                        <button id="improveBtn" class="bg-accent-green text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-magic mr-2"></i>Mejorar a Tono Profesional
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: BENEFICIOS Y OPORTUNIDADES -->
         <section id="beneficios" class="section-content min-h-screen p-6 md:p-12 bg-gray-50">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Beneficios y Oportunidades</h2>
@@ -561,7 +604,7 @@
             </div>
         </section>
 
-        <!-- Section 6: POLÍTICA USO IA -->
+        <!-- Section 7: POLÍTICA USO IA -->
         <section id="politica" class="section-content min-h-screen p-6 md:p-12 bg-white">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Política de Uso de IA</h2>
@@ -677,7 +720,7 @@
             </div>
         </section>
 
-        <!-- Section 7: RECURSOS INTERESANTES -->
+        <!-- Section 8: RECURSOS INTERESANTES -->
         <section id="recursos" class="section-content min-h-screen p-6 md:p-12 bg-gray-50">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Recursos Interesantes</h2>
@@ -762,7 +805,7 @@
             </div>
         </section>
 
-        <!-- Section 8: EQUIPO -->
+        <!-- Section 9: EQUIPO -->
         <section id="equipo" class="section-content min-h-screen p-6 md:p-12 bg-white">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-corporate-dark mb-8 text-center">Equipo de Desarrollo ADO</h2>
@@ -857,7 +900,7 @@
             </div>
         </section>
 
-        <!-- Section 9: PRÓXIMOS PASOS -->
+        <!-- Section 10: PRÓXIMOS PASOS -->
         <section id="proximos-pasos" class="section-content min-h-screen p-6 md:p-12 bg-gradient-to-br from-corporate-dark to-corporate-blue text-white">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold mb-8 text-center">Próximos Pasos</h2>
