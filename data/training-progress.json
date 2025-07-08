@@ -1,0 +1,98 @@
+{
+  "training_roadmap": {
+    "phases": [
+      {
+        "id": "phase_1",
+        "name": "Capacitación Inicial",
+        "status": "completed",
+        "description": "Fundamentos de IA y mejores prácticas con materiales interactivos",
+        "deliverables": [
+          "Guía interactiva completada",
+          "Conceptos básicos de IA",
+          "Política de uso establecida",
+          "Stack recomendado definido"
+        ],
+        "completion_percentage": 100
+      },
+      {
+        "id": "phase_2",
+        "name": "Canal de Feedback",
+        "status": "in_progress",
+        "description": "Comunidad de práctica y canal dedicado para dudas y experiencias",
+        "deliverables": [
+          "Canal de comunicación establecido",
+          "Sistema de feedback implementado",
+          "Comunidad de práctica activa",
+          "Sesiones de Q&A regulares"
+        ],
+        "completion_percentage": 25
+      },
+      {
+        "id": "phase_3",
+        "name": "Sesiones Especializadas",
+        "status": "planned",
+        "description": "Capacitación específica por equipos y roles",
+        "deliverables": [
+          "Capacitación por departamento",
+          "Casos de uso específicos",
+          "Métricas de adopción",
+          "Certificación interna"
+        ],
+        "completion_percentage": 0
+      }
+    ]
+  },
+  "team_structure": {
+    "ado_team": [
+      {
+        "name": "Daniel Rodriguez",
+        "role": "Líder del Departamento de ADO",
+        "specialization": "Dirección estratégica y coordinación de equipo",
+        "contact": "daniel.rodriguez@grupoo2.com"
+      },
+      {
+        "name": "Luis Alberto Olcay",
+        "role": "Líder de Tecnología",
+        "specialization": "Arquitectura de IA y desarrollo tecnológico",
+        "contact": "luis.olcay@grupoo2.com"
+      },
+      {
+        "name": "Carlos Gutierrez",
+        "role": "Desarrollador",
+        "specialization": "Desarrollo de software e implementación",
+        "contact": "carlos.gutierrez@grupoo2.com"
+      },
+      {
+        "name": "Claudio Pacheco",
+        "role": "Desarrollador",
+        "specialization": "Desarrollo de aplicaciones y sistemas",
+        "contact": "claudio.pacheco@grupoo2.com"
+      },
+      {
+        "name": "Adan Cumana",
+        "role": "Analista de Datos",
+        "specialization": "Análisis de datos e insights de IA",
+        "contact": "adan.cumana@grupoo2.com"
+      }
+    ]
+  },
+  "metrics": {
+    "completion_goals": {
+      "total_sections": 9,
+      "expected_completion_rate": 85,
+      "reflection_participation_target": 70
+    },
+    "engagement_tracking": {
+      "sections_visited": 0,
+      "reflections_completed": 0,
+      "modal_interactions": 0,
+      "chart_views": 0
+    }
+  },
+  "feedback_channels": {
+    "office_forms": "https://forms.office.com/feedback",
+    "email_support": "ai-support@grupoo2.com",
+    "internal_chat": "#ai-grupoo2",
+    "scheduled_sessions": "Weekly Fridays 3:00 PM"
+  }
+}

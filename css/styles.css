@@ -1,0 +1,459 @@
+/* Custom CSS for Guía IA | GrupoO2 */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section transitions */
+.section-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navigation active states */
+.nav-link.active {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* Index cards hover effects */
+.index-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.index-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Flip cards */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 250px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    padding: 20px;
+}
+
+/* Action cards */
+.action-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Benefit cards */
+.benefit-card {
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Policy cards */
+.policy-card {
+    transition: all 0.3s ease;
+}
+
+.policy-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Team members */
+.team-member {
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+/* News cards */
+.news-card {
+    transition: all 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Roadmap items */
+.roadmap-item {
+    padding: 1rem 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    margin-left: 1rem;
+    position: relative;
+}
+
+.roadmap-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+/* Group options */
+.group-option {
+    transition: all 0.3s ease;
+}
+
+.group-option:hover {
+    transform: translateY(-2px);
+}
+
+/* Reflection points */
+.reflection-point {
+    transition: all 0.3s ease;
+}
+
+.reflection-point:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal styles */
+.modal {
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Chart container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 0 auto;
+}
+
+/* AI Model cards */
+.ai-model-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-model-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.ai-model-card:hover::before {
+    left: 100%;
+}
+
+.ai-model-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    /* Sidebar is hidden by default on mobile through JavaScript */
+    #sidebar {
+        /* Ensure proper z-index and positioning */
+        z-index: 50;
+    }
+    
+    .flip-card {
+        height: 200px;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+        max-height: 80vh;
+    }
+}
+
+/* Desktop responsiveness */
+@media (min-width: 769px) {
+    #sidebar {
+        /* Ensure sidebar is always visible on desktop */
+        transform: translateX(0) !important;
+    }
+}
+
+/* Scroll animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Glassmorphism effects */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(45deg, #183c6d, #3b82f6, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Button hover effects */
+.btn-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-hover:hover::before {
+    left: 100%;
+}
+
+/* Floating elements */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Pulse animation */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Typewriter effect */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    animation: typewriter 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: orange; }
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f97316, #fb923c);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Accessibility improvements */
+.focus-visible:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .sidebar, .mobile-menu-btn, .modal {
+        display: none !important;
+    }
+    
+    .section-content {
+        page-break-inside: avoid;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .flip-card-front, .action-card > div:first-child {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --card-bg: #2a2a2a;
+    }
+}

@@ -1,0 +1,114 @@
+{
+  "ai_models": [
+    {
+      "id": "gpt",
+      "name": "GPT (OpenAI)",
+      "type": "Caja Negra",
+      "category": "conversational",
+      "description": "Modelo conversacional avanzado para texto, análisis y creatividad.",
+      "capabilities": ["Texto", "Análisis", "Creatividad", "Programación"],
+      "use_cases": [
+        "Redacción de contenido",
+        "Análisis de texto",
+        "Generación de código",
+        "Asistencia en tareas creativas"
+      ],
+      "access": "Suscripción",
+      "company": "OpenAI"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini (Google)",
+      "type": "Caja Negra",
+      "category": "multimodal",
+      "description": "IA multimodal de Google para texto, imágenes y análisis complejo.",
+      "capabilities": ["Texto", "Imágenes", "Video", "Análisis"],
+      "use_cases": [
+        "Análisis multimodal",
+        "Procesamiento de documentos",
+        "Análisis de imágenes",
+        "Investigación compleja"
+      ],
+      "access": "Gratuito con límites",
+      "company": "Google"
+    },
+    {
+      "id": "claude",
+      "name": "Claude (Anthropic)",
+      "type": "Caja Negra",
+      "category": "conversational",
+      "description": "IA enfocada en conversaciones seguras y análisis ético.",
+      "capabilities": ["Texto", "Análisis", "Ética", "Seguridad"],
+      "use_cases": [
+        "Análisis ético",
+        "Conversaciones seguras",
+        "Revisión de contenido",
+        "Consultoría responsable"
+      ],
+      "access": "Suscripción",
+      "company": "Anthropic"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "type": "Código Abierto",
+      "category": "open_source",
+      "description": "Modelo open source para desarrollo y personalización avanzada.",
+      "capabilities": ["Código", "Personalización", "Desarrollo", "Investigación"],
+      "use_cases": [
+        "Desarrollo personalizado",
+        "Investigación académica",
+        "Implementaciones locales",
+        "Experimentación avanzada"
+      ],
+      "access": "Gratuito",
+      "company": "DeepSeek"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity AI",
+      "type": "Caja Negra",
+      "category": "search",
+      "description": "Motor de búsqueda con IA para investigación precisa y actualizada.",
+      "capabilities": ["Búsqueda", "Investigación", "Citas", "Actualización"],
+      "use_cases": [
+        "Investigación de mercado",
+        "Búsqueda de información",
+        "Verificación de datos",
+        "Análisis de tendencias"
+      ],
+      "access": "Freemium",
+      "company": "Perplexity"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM (Google)",
+      "type": "Caja Negra",
+      "category": "document_analysis",
+      "description": "IA para análisis y síntesis de documentos extensos.",
+      "capabilities": ["Documentos", "Síntesis", "Análisis", "Resúmenes"],
+      "use_cases": [
+        "Análisis de documentos largos",
+        "Síntesis de información",
+        "Investigación académica",
+        "Preparación de reportes"
+      ],
+      "access": "Gratuito",
+      "company": "Google"
+    }
+  ],
+  "recommended_stack": {
+    "primary": "gemini",
+    "research": "perplexity",
+    "documents": "notebooklm"
+  },
+  "enterprise_access": {
+    "email_domain": "@grupoo2.com",
+    "available_features": [
+      "Acceso premium",
+      "Límites extendidos",
+      "Soporte empresarial",
+      "Políticas de privacidad mejoradas"
+    ]
+  }
+}
