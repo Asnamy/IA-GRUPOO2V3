@@ -573,26 +573,74 @@ window.exportToPDF = exportToPDF;
 window.shareContent = shareContent;
 
 function setupAILab() {
+    const scenarioSelector = document.getElementById('scenarioSelector');
     const summarizeBtn = document.getElementById('summarizeBtn');
     const improveBtn = document.getElementById('improveBtn');
     const outputPanel = document.getElementById('outputPanel');
-    const originalPlaceholder = '<span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>';
+    const inputText = document.getElementById('inputText');
 
-    if (!summarizeBtn) {
-        // Si el botón no existe, no hacemos nada.
-        return;
+    if (!scenarioSelector) {
+        return; // Si no estamos en la página correcta, no hacer nada.
     }
 
-    const summaryText = "Reunión sobre el reporte trimestral mañana a las 10am. Se requiere preparación sobre resultados y próximos pasos.";
-    
-    const improvedText = `
-        <p class="mb-2"><strong>Asunto:</strong> Preparación para la Reunión de Revisión Trimestral de Mañana</p>
-        <p class="mb-2">Estimado equipo,</p>
-        <p class="mb-2">Este es un recordatorio cordial sobre nuestra reunión programada para mañana a las <strong>10:00 a.m.</strong>, en la que analizaremos el informe de resultados trimestrales.</p>
-        <p class="mb-2">Para asegurar una sesión productiva, les solicito amablemente que asistan habiendo revisado los resultados y preparados para discutir los próximos pasos estratégicos.</p>
-        <p>Agradezco de antemano su puntualidad y valiosa contribución.</p>
-    `;
+    // --- BANCO DE EJEMPLOS ---
+    // Aquí guardamos todos nuestros escenarios. ¡Puedes añadir más fácilmente!
+    const examples = [
+        {
+            id: 'reunion',
+            name: 'Recordatorio de Reunión Trimestral',
+            inputText: 'Hola equipo, quería recordarles sobre la reunión de mañana para discutir el reporte trimestral. Es importante que todos vengan preparados para hablar de los resultados y los próximos pasos. La junta es a las 10am. No lleguen tarde. Saludos.',
+            summaryText: 'Reunión sobre el reporte trimestral mañana a las 10am. Se requiere preparación sobre resultados y próximos pasos.',
+            improvedText: `
+                <p class="mb-2"><strong>Asunto:</strong> Preparación para la Reunión de Revisión Trimestral</p>
+                <p class="mb-2">Estimado equipo,</p>
+                <p class="mb-2">Este es un recordatorio cordial sobre nuestra reunión programada para mañana a las <strong>10:00 a.m.</strong>, en la que analizaremos el informe de resultados trimestrales.</p>
+                <p>Agradezco de antemano su puntualidad y valiosa contribución.</p>
+            `
+        },
+        {
+            id: 'mantenimiento',
+            name: 'Anuncio de Mantenimiento',
+            inputText: 'chicos, les aviso que mañana el equipo de TI va a hacer mantenimiento en los servidores desde temprano, asi que porfa lleguen antes para que puedan guardar todo y apagar bien sus equipos. empezaran a las 8am en punto. no se olviden!',
+            summaryText: 'El equipo de TI realizará mantenimiento de servidores mañana a las 8:00 a.m. Se solicita llegar antes para guardar archivos y apagar equipos.',
+            improvedText: `
+                <p class="mb-2"><strong>Asunto:</strong> Aviso Importante: Mantenimiento Programado de Servidores</p>
+                <p class="mb-2">Estimados colaboradores,</p>
+                <p class="mb-2">Les informamos que el departamento de TI llevará a cabo un mantenimiento esencial en nuestros servidores el día de mañana, a partir de las <strong>8:00 a.m.</strong></p>
+                <p class="mb-2">Para evitar cualquier pérdida de información, les solicitamos amablemente llegar con antelación para guardar su trabajo y apagar correctamente sus ordenadores antes de dicha hora.</p>
+                <p>Agradecemos su colaboración.</p>
+            `
+        }
+    ];
 
+    // --- LÓGICA DE LA APLICACIÓN ---
+
+    // 1. Llena el menú desplegable con las opciones de nuestro banco de ejemplos
+    examples.forEach(example => {
+        const option = document.createElement('option');
+        option.value = example.id;
+        option.textContent = example.name;
+        scenarioSelector.appendChild(option);
+    });
+
+    // 2. Función para actualizar el texto de entrada cuando se cambia el escenario
+    function updateScenario() {
+        const selectedId = scenarioSelector.value;
+        const selectedExample = examples.find(ex => ex.id === selectedId);
+        if (selectedExample) {
+            inputText.value = selectedExample.inputText;
+            outputPanel.innerHTML = '<span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>';
+        }
+    }
+
+    // 3. Escucha los cambios en el menú desplegable
+    scenarioSelector.addEventListener('change', updateScenario);
+
+    // 4. Llama a la función una vez al inicio para cargar el primer ejemplo
+    updateScenario();
+
+
+    // --- Lógica de los botones (ahora es dinámica) ---
     function showLoader() {
         outputPanel.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full text-center text-corporate-blue">
@@ -601,18 +649,26 @@ function setupAILab() {
             </div>
         `;
     }
-
+    
     summarizeBtn.addEventListener('click', () => {
-        showLoader();
-        setTimeout(() => {
-            outputPanel.innerHTML = `<p class="text-gray-700">${summaryText}</p>`;
-        }, 2000); // Simula 2 segundos
+        const selectedId = scenarioSelector.value;
+        const selectedExample = examples.find(ex => ex.id === selectedId);
+        if (selectedExample) {
+            showLoader();
+            setTimeout(() => {
+                outputPanel.innerHTML = `<p class="text-gray-700">${selectedExample.summaryText}</p>`;
+            }, 1500);
+        }
     });
 
     improveBtn.addEventListener('click', () => {
-        showLoader();
-        setTimeout(() => {
-            outputPanel.innerHTML = `<div class="text-gray-700 text-left">${improvedText}</div>`;
-        }, 2500); // Simula 2.5 segundos
+        const selectedId = scenarioSelector.value;
+        const selectedExample = examples.find(ex => ex.id === selectedId);
+        if (selectedExample) {
+            showLoader();
+            setTimeout(() => {
+                outputPanel.innerHTML = `<div class="text-gray-700 text-left">${selectedExample.improvedText}</div>`;
+            }, 2000);
+        }
     });
 }
