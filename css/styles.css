@@ -457,3 +457,15 @@ html {
         --card-bg: #2a2a2a;
     }
 }
+
+/* Estilos para el Loader del Laboratorio de IA */
+.loader {
+    border-top-color: #3b82f6; /* Este es tu 'corporate-light' blue */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
+    }
+}
