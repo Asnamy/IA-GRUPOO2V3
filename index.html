@@ -495,17 +495,25 @@
                 <!-- Asistente de Redacción -->
                 <div class="bg-white rounded-lg shadow-2xl p-8 border border-gray-200">
                     <h3 class="text-2xl font-semibold text-corporate-dark mb-6 text-center">Asistente de Redacción Inteligente</h3>
+                    
+                    <!-- NOVEDAD: Menú desplegable para elegir el escenario -->
+                    <div class="mb-6">
+                        <label for="scenarioSelector" class="block font-semibold mb-2 text-gray-700">1. Elige un escenario de ejemplo:</label>
+                        <select id="scenarioSelector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition">
+                            <!-- Las opciones se generarán con JavaScript -->
+                        </select>
+                    </div>
+        
                     <div class="grid md:grid-cols-2 gap-8">
-                        
                         <!-- Panel de Entrada -->
                         <div>
-                            <label for="inputText" class="block font-semibold mb-2 text-gray-700">1. Escribe o modifica el texto original:</label>
-                            <textarea id="inputText" rows="12" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition">Hola equipo, quería recordarles sobre la reunión de mañana para discutir el reporte trimestral. Es importante que todos vengan preparados para hablar de los resultados y los próximos pasos. La junta es a las 10am. No lleguen tarde. Saludos.</textarea>
+                            <label for="inputText" class="block font-semibold mb-2 text-gray-700">2. Texto Original (puedes modificarlo):</label>
+                            <textarea id="inputText" rows="12" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent transition"></textarea>
                         </div>
         
                         <!-- Panel de Salida -->
                         <div>
-                            <label class="block font-semibold mb-2 text-gray-700">3. Observa el resultado generado por la IA:</label>
+                            <label class="block font-semibold mb-2 text-gray-700">4. Resultado generado por la IA:</label>
                             <div id="outputPanel" class="w-full h-full p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center justify-center">
                                 <span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>
                             </div>
@@ -514,7 +522,7 @@
         
                     <!-- Botones de Acción -->
                     <div class="mt-8 text-center">
-                        <p class="font-semibold mb-4 text-gray-700">2. Elige una acción:</p>
+                        <p class="font-semibold mb-4 text-gray-700">3. Elige una acción:</p>
                         <button id="summarizeBtn" class="bg-corporate-blue text-white px-6 py-3 rounded-lg hover:bg-corporate-dark transition-transform hover:scale-105 mr-3 shadow-lg">
                             <i class="fas fa-compress-alt mr-2"></i>Resumir Texto
                         </button>
