@@ -573,102 +573,147 @@ window.exportToPDF = exportToPDF;
 window.shareContent = shareContent;
 
 function setupAILab() {
-    const scenarioSelector = document.getElementById('scenarioSelector');
-    const summarizeBtn = document.getElementById('summarizeBtn');
-    const improveBtn = document.getElementById('improveBtn');
-    const outputPanel = document.getElementById('outputPanel');
-    const inputText = document.getElementById('inputText');
+    // --- ELEMENTOS COMUNES Y LÓGICA DE PESTAÑAS ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-    if (!scenarioSelector) {
-        return; // Si no estamos en la página correcta, no hacer nada.
-    }
+    if (!tabButtons.length) return; // Salir si no hay laboratorio
 
-    // --- BANCO DE EJEMPLOS ---
-    // Aquí guardamos todos nuestros escenarios. ¡Puedes añadir más fácilmente!
-    const examples = [
-        {
-            id: 'reunion',
-            name: 'Recordatorio de Reunión Trimestral',
-            inputText: 'Hola equipo, quería recordarles sobre la reunión de mañana para discutir el reporte trimestral. Es importante que todos vengan preparados para hablar de los resultados y los próximos pasos. La junta es a las 10am. No lleguen tarde. Saludos.',
-            summaryText: 'Reunión sobre el reporte trimestral mañana a las 10am. Se requiere preparación sobre resultados y próximos pasos.',
-            improvedText: `
-                <p class="mb-2"><strong>Asunto:</strong> Preparación para la Reunión de Revisión Trimestral</p>
-                <p class="mb-2">Estimado equipo,</p>
-                <p class="mb-2">Este es un recordatorio cordial sobre nuestra reunión programada para mañana a las <strong>10:00 a.m.</strong>, en la que analizaremos el informe de resultados trimestrales.</p>
-                <p>Agradezco de antemano su puntualidad y valiosa contribución.</p>
-            `
-        },
-        {
-            id: 'mantenimiento',
-            name: 'Anuncio de Mantenimiento',
-            inputText: 'chicos, les aviso que mañana el equipo de TI va a hacer mantenimiento en los servidores desde temprano, asi que porfa lleguen antes para que puedan guardar todo y apagar bien sus equipos. empezaran a las 8am en punto. no se olviden!',
-            summaryText: 'El equipo de TI realizará mantenimiento de servidores mañana a las 8:00 a.m. Se solicita llegar antes para guardar archivos y apagar equipos.',
-            improvedText: `
-                <p class="mb-2"><strong>Asunto:</strong> Aviso Importante: Mantenimiento Programado de Servidores</p>
-                <p class="mb-2">Estimados colaboradores,</p>
-                <p class="mb-2">Les informamos que el departamento de TI llevará a cabo un mantenimiento esencial en nuestros servidores el día de mañana, a partir de las <strong>8:00 a.m.</strong></p>
-                <p class="mb-2">Para evitar cualquier pérdida de información, les solicitamos amablemente llegar con antelación para guardar su trabajo y apagar correctamente sus ordenadores antes de dicha hora.</p>
-                <p>Agradecemos su colaboración.</p>
-            `
-        }
-    ];
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target;
+            
+            // Actualizar botones
+            tabButtons.forEach(btn => btn.classList.remove('active-tab'));
+            button.classList.add('active-tab');
 
-    // --- LÓGICA DE LA APLICACIÓN ---
-
-    // 1. Llena el menú desplegable con las opciones de nuestro banco de ejemplos
-    examples.forEach(example => {
-        const option = document.createElement('option');
-        option.value = example.id;
-        option.textContent = example.name;
-        scenarioSelector.appendChild(option);
+            // Actualizar contenido
+            tabContents.forEach(content => {
+                if (content.id === targetId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
     });
 
-    // 2. Función para actualizar el texto de entrada cuando se cambia el escenario
-    function updateScenario() {
-        const selectedId = scenarioSelector.value;
-        const selectedExample = examples.find(ex => ex.id === selectedId);
-        if (selectedExample) {
-            inputText.value = selectedExample.inputText;
-            outputPanel.innerHTML = '<span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>';
+    // --- LÓGICA PARA EL ASISTENTE DE REDACCIÓN (Pestaña 1) ---
+    (function setupWritingAssistant() {
+        const scenarioSelector = document.getElementById('scenarioSelector');
+        const summarizeBtn = document.getElementById('summarizeBtn');
+        const improveBtn = document.getElementById('improveBtn');
+        const outputPanel = document.getElementById('outputPanel');
+        const inputText = document.getElementById('inputText');
+
+        const examples = [
+            {
+                id: 'reunion',
+                name: 'Recordatorio de Reunión Trimestral',
+                inputText: 'Hola equipo, quería recordarles sobre la reunión de mañana para discutir el reporte trimestral. Es importante que todos vengan preparados. La junta es a las 10am. Saludos.',
+                summaryText: 'Reunión sobre reporte trimestral mañana a las 10am. Se requiere preparación.',
+                improvedText: '<p><strong>Asunto:</strong> Preparación para la Reunión de Revisión Trimestral</p><p>Estimado equipo,</p><p>Este es un recordatorio cordial sobre nuestra reunión de mañana a las 10:00 a.m. para analizar el informe trimestral. Agradezco su puntualidad.</p>'
+            },
+            {
+                id: 'mantenimiento',
+                name: 'Anuncio de Mantenimiento',
+                inputText: 'chicos, les aviso que mañana TI va a hacer mantenimiento en los servidores desde temprano, asi que porfa lleguen antes para que puedan guardar todo. empezaran a las 8am.',
+                summaryText: 'TI realizará mantenimiento de servidores mañana a las 8:00 a.m. Se solicita llegar antes para guardar archivos.',
+                improvedText: '<p><strong>Asunto:</strong> Aviso Importante: Mantenimiento Programado</p><p>Estimados colaboradores,</p><p>Les informamos que TI llevará a cabo un mantenimiento esencial en nuestros servidores el día de mañana, a partir de las 8:00 a.m. Solicitamos llegar con antelación para guardar su trabajo.</p>'
+            }
+        ];
+
+        examples.forEach(ex => scenarioSelector.add(new Option(ex.name, ex.id)));
+        
+        function updateScenario() {
+            const selected = examples.find(ex => ex.id === scenarioSelector.value);
+            if (selected) {
+                inputText.value = selected.inputText;
+                outputPanel.innerHTML = '<span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>';
+            }
         }
-    }
+        scenarioSelector.addEventListener('change', updateScenario);
+        updateScenario();
 
-    // 3. Escucha los cambios en el menú desplegable
-    scenarioSelector.addEventListener('change', updateScenario);
-
-    // 4. Llama a la función una vez al inicio para cargar el primer ejemplo
-    updateScenario();
-
-
-    // --- Lógica de los botones (ahora es dinámica) ---
-    function showLoader() {
-        outputPanel.innerHTML = `
-            <div class="flex flex-col items-center justify-center h-full text-center text-corporate-blue">
-                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-                <p class="font-semibold">Procesando solicitud...</p>
-            </div>
-        `;
-    }
-    
-    summarizeBtn.addEventListener('click', () => {
-        const selectedId = scenarioSelector.value;
-        const selectedExample = examples.find(ex => ex.id === selectedId);
-        if (selectedExample) {
-            showLoader();
-            setTimeout(() => {
-                outputPanel.innerHTML = `<p class="text-gray-700">${selectedExample.summaryText}</p>`;
-            }, 1500);
+        function showLoader(panel) {
+            panel.innerHTML = `<div class="flex items-center justify-center h-full text-corporate-blue"><div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div></div>`;
         }
-    });
+        
+        summarizeBtn.addEventListener('click', () => {
+            const selected = examples.find(ex => ex.id === scenarioSelector.value);
+            if (selected) {
+                showLoader(outputPanel);
+                setTimeout(() => { outputPanel.innerHTML = `<p>${selected.summaryText}</p>`; }, 1500);
+            }
+        });
 
-    improveBtn.addEventListener('click', () => {
-        const selectedId = scenarioSelector.value;
-        const selectedExample = examples.find(ex => ex.id === selectedId);
-        if (selectedExample) {
-            showLoader();
-            setTimeout(() => {
-                outputPanel.innerHTML = `<div class="text-gray-700 text-left">${selectedExample.improvedText}</div>`;
-            }, 2000);
+        improveBtn.addEventListener('click', () => {
+            const selected = examples.find(ex => ex.id === scenarioSelector.value);
+            if (selected) {
+                showLoader(outputPanel);
+                setTimeout(() => { outputPanel.innerHTML = `<div class="text-left">${selected.improvedText}</div>`; }, 2000);
+            }
+        });
+    })();
+
+    // --- LÓGICA PARA EL GENERADOR DE FÓRMULAS (Pestaña 2) ---
+    (function setupFormulaGenerator() {
+        const scenarioSelector = document.getElementById('formulaScenarioSelector');
+        const generateBtn = document.getElementById('generateFormulaBtn');
+        const problemDiv = document.getElementById('formulaProblem');
+        const outputDiv = document.getElementById('formulaOutput');
+
+        const formulaScenarios = [
+            {
+                id: 'sumif',
+                name: 'Sumar celdas que cumplen una condición',
+                problem: "Quiero sumar todos los valores de la columna 'B' donde la celda correspondiente en la columna 'A' diga 'Ventas'.",
+                formula: '=SUMIF(A:A, "Ventas", B:B)'
+            },
+            {
+                id: 'vlookup',
+                name: 'Buscar un valor en una tabla',
+                problem: "Quiero encontrar el 'Precio' (columna 3) de un 'Producto' (cuyo ID está en la celda E2) dentro de la tabla A1:C50.",
+                formula: '=VLOOKUP(E2, A1:C50, 3, FALSE)'
+            },
+            {
+                id: 'countif',
+                name: 'Contar cuántas veces aparece un texto',
+                problem: "Quiero contar cuántas celdas en el rango A1 a A100 contienen la palabra 'Completado'.",
+                formula: '=COUNTIF(A1:A100, "Completado")'
+            }
+        ];
+
+        formulaScenarios.forEach(sc => scenarioSelector.add(new Option(sc.name, sc.id)));
+        
+        function updateFormulaScenario() {
+            const selected = formulaScenarios.find(sc => sc.id === scenarioSelector.value);
+            if (selected) {
+                problemDiv.textContent = selected.problem;
+                outputDiv.innerHTML = '<span class="text-gray-400">Aquí aparecerá la fórmula...</span>';
+            }
         }
+        scenarioSelector.addEventListener('change', updateFormulaScenario);
+        updateFormulaScenario();
+
+        generateBtn.addEventListener('click', () => {
+            const selected = formulaScenarios.find(sc => sc.id === scenarioSelector.value);
+            if (selected) {
+                outputDiv.innerHTML = '<div class="loader ease-linear rounded-full border-2 border-t-2 border-gray-400 h-6 w-6"></div>';
+                setTimeout(() => {
+                    outputDiv.innerHTML = `<span>${selected.formula}</span><button onclick="copyToClipboard('${selected.formula}', this)" class="ml-4 bg-gray-600 px-3 py-1 rounded text-xs hover:bg-gray-500">Copiar</button>`;
+                }, 2000);
+            }
+        });
+    })();
+}
+
+// Función global para copiar al portapapeles
+function copyToClipboard(text, element) {
+    navigator.clipboard.writeText(text).then(() => {
+        element.textContent = '¡Copiado!';
+        setTimeout(() => { element.textContent = 'Copiar'; }, 2000);
     });
 }
+// Hacemos la función accesible globalmente para que el 'onclick' funcione
+window.copyToClipboard = copyToClipboard;
