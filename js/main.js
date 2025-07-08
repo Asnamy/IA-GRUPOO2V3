@@ -12,6 +12,7 @@ function initializeApp() {
     setupChart();
     setupModals();
     setActiveSection();
+    setupAILab();
 }
 
 // Navigation Setup
@@ -570,3 +571,48 @@ window.toggleReflection = toggleReflection;
 window.printPage = printPage;
 window.exportToPDF = exportToPDF;
 window.shareContent = shareContent;
+
+function setupAILab() {
+    const summarizeBtn = document.getElementById('summarizeBtn');
+    const improveBtn = document.getElementById('improveBtn');
+    const outputPanel = document.getElementById('outputPanel');
+    const originalPlaceholder = '<span class="text-gray-500 italic">Aquí aparecerá la respuesta de la IA...</span>';
+
+    if (!summarizeBtn) {
+        // Si el botón no existe, no hacemos nada.
+        return;
+    }
+
+    const summaryText = "Reunión sobre el reporte trimestral mañana a las 10am. Se requiere preparación sobre resultados y próximos pasos.";
+    
+    const improvedText = `
+        <p class="mb-2"><strong>Asunto:</strong> Preparación para la Reunión de Revisión Trimestral de Mañana</p>
+        <p class="mb-2">Estimado equipo,</p>
+        <p class="mb-2">Este es un recordatorio cordial sobre nuestra reunión programada para mañana a las <strong>10:00 a.m.</strong>, en la que analizaremos el informe de resultados trimestrales.</p>
+        <p class="mb-2">Para asegurar una sesión productiva, les solicito amablemente que asistan habiendo revisado los resultados y preparados para discutir los próximos pasos estratégicos.</p>
+        <p>Agradezco de antemano su puntualidad y valiosa contribución.</p>
+    `;
+
+    function showLoader() {
+        outputPanel.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full text-center text-corporate-blue">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                <p class="font-semibold">Procesando solicitud...</p>
+            </div>
+        `;
+    }
+
+    summarizeBtn.addEventListener('click', () => {
+        showLoader();
+        setTimeout(() => {
+            outputPanel.innerHTML = `<p class="text-gray-700">${summaryText}</p>`;
+        }, 2000); // Simula 2 segundos
+    });
+
+    improveBtn.addEventListener('click', () => {
+        showLoader();
+        setTimeout(() => {
+            outputPanel.innerHTML = `<div class="text-gray-700 text-left">${improvedText}</div>`;
+        }, 2500); // Simula 2.5 segundos
+    });
+}
