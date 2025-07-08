@@ -47,32 +47,44 @@
       {
         "name": "Daniel Rodriguez",
         "role": "Líder del Departamento de ADO",
-        "specialization": "Dirección estratégica y coordinación de equipo",
-        "contact": "daniel.rodriguez@grupoo2.com"
+        "image": "images/Daniel.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/daniel-rodriguez-ejemplo",
+        "email": "daniel.rodriguez@grupoo2.com"
       },
       {
         "name": "Luis Alberto Olcay",
         "role": "Líder de Tecnología",
-        "specialization": "Arquitectura de IA y desarrollo tecnológico",
-        "contact": "luis.olcay@grupoo2.com"
+        "image": "images/Luis.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/luis-olcay-ejemplo",
+        "email": "luis.olcay@grupoo2.com"
       },
       {
         "name": "Carlos Gutierrez",
         "role": "Desarrollador",
-        "specialization": "Desarrollo de software e implementación",
-        "contact": "carlos.gutierrez@grupoo2.com"
+        "image": "images/Carlos.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/carlos-gutierrez-ejemplo",
+        "email": "carlos.gutierrez@grupoo2.com"
       },
       {
         "name": "Claudio Pacheco",
         "role": "Desarrollador",
-        "specialization": "Desarrollo de aplicaciones y sistemas",
-        "contact": "claudio.pacheco@grupoo2.com"
+        "image": "images/Claudio.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/claudio-pacheco-ejemplo",
+        "email": "claudio.pacheco@grupoo2.com"
       },
       {
         "name": "Adan Cumana",
         "role": "Analista de Datos",
-        "specialization": "Análisis de datos e insights de IA",
-        "contact": "adan.cumana@grupoo2.com"
+        "image": "images/Adan.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/adan-cumana-ejemplo",
+        "email": "adan.cumana@grupoo2.com"
+      },
+      {
+        "name": "Pablo Palma",
+        "role": "Jefe Marketing Digital",
+        "image": "images/Pablo.jpg",
+        "linkedin_url": "https://www.linkedin.com/in/pablo-palma-ejemplo",
+        "email": "pablo.palma@grupoo2.com"
       }
     ]
   },
