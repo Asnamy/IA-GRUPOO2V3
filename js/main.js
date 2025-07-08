@@ -13,6 +13,7 @@ function initializeApp() {
     setupModals();
     setActiveSection();
     setupAILab();
+    loadTeamMembers();
 }
 
 // Navigation Setup
@@ -719,4 +720,48 @@ function setupAILab() {
 
     // CAMBIO 3: Ya no necesitamos la función global, así que la eliminamos para mantener el código limpio.
     // Se eliminó la función `copyToClipboard` y `window.copyToClipboard`.
+}
+async function loadTeamMembers() {
+    try {
+        const response = await fetch('training-progress.json');
+        if (!response.ok) {
+            throw new Error(`Error al cargar el archivo JSON: ${response.statusText}`);
+        }
+        const data = await response.json();
+        const teamMembers = data.team_structure.ado_team;
+        const container = document.getElementById('team-container');
+
+        if (!container) return; // Si no hay contenedor, no hacer nada
+
+        // Limpiamos el contenedor por si acaso
+        container.innerHTML = '';
+
+        // Creamos una tarjeta HTML para cada miembro del equipo
+        teamMembers.forEach(member => {
+            const memberCardHTML = `
+                <div class="team-member bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 text-center hover:shadow-lg transition-all">
+                    <div class="mb-4">
+                        <img src="${member.image}" alt="${member.name}" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-corporate-blue">
+                    </div>
+                    <h3 class="text-xl font-semibold text-corporate-dark mb-2">${member.name}</h3>
+                    <p class="text-gray-600 mb-3">${member.role}</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="${member.linkedin_url}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de ${member.name}">
+                            <i class="fab fa-linkedin text-2xl text-corporate-blue hover:text-blue-700 transition-colors"></i>
+                        </a>
+                        <a href="mailto:${member.email}" aria-label="Email de ${member.name}">
+                            <i class="fas fa-envelope text-2xl text-gray-400 hover:text-gray-600 transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += memberCardHTML;
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar la información del equipo:', error);
+        // Opcionalmente, mostrar un mensaje de error en la página
+        const container = document.getElementById('team-container');
+        if(container) container.innerHTML = '<p class="text-center text-red-500">Error al cargar la información del equipo.</p>';
+    }
 }
